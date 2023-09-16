@@ -11,8 +11,8 @@ package but for the most part has been rewritten to behave as a block element ra
 an inline one. Implementation of embed services were separated and additional options have
 been added to control the output of the generated embed code.
 
-
 Example input:
+
 ```markdown
 Here is an embedded video:
 
@@ -20,25 +20,28 @@ Here is an embedded video:
 ```
 
 Output (with default options):
+
 ```html
 <div class="block-embed block-embed-service-youtube">
-  <iframe type="text/html"
-          width="640"
-          height="390"
-          src="//www.youtube.com/embed/lJIrF4YjHfQ"
-          frameborder="0"
-          webkitallowfullscreen mozallowfullscreen allowfullscreen>
+  <iframe
+    type="text/html"
+    width="640"
+    height="390"
+    src="//www.youtube.com/embed/lJIrF4YjHfQ"
+    frameborder="0"
+    webkitallowfullscreen
+    mozallowfullscreen
+    allowfullscreen
+  >
   </iframe>
 </div>
 ```
-
 
 ## Install
 
 ```
 $ npm install --save markdown-it-block-embed
 ```
-
 
 ## Usage
 
@@ -47,7 +50,7 @@ var md = require("markdown-it")();
 var blockEmbedPlugin = require("markdown-it-block-embed");
 
 md.use(blockEmbedPlugin, {
-  containerClassName: "video-embed"
+  containerClassName: "video-embed",
 });
 
 var input = "@[youtube](lJIrF4YjHfQ)";
@@ -56,38 +59,38 @@ var output = md.render(input);
 console.log(output);
 ```
 
-
 ## Options
 
-Option               | Type                 | Default                  | Description
-:--------------------|:---------------------|:-------------------------|:------------------------------------------------------------------------------------------------------------------------------------------
-`containerClassName` | `string` \| `null`   | `'block-embed'`          | Class name for image container element.
-`serviceClassPrefix` | `string`             | `'block-embed-service-'` | Prefix for service name in CSS class.
-`outputPlayerSize`   | `boolean`            | `true`                   | Indicates if 'width' and 'height' attributes are written to output.
-`allowFullScreen`    | `boolean`            | `true`                   | Indicates whether embed iframe should be allowed to enter full screen mode.
-`filterUrl`          | `function` \| `null` | `null`                   | A function that customizes url output. Signature: `function (url: string, serviceName: string, videoID: string, options: object): string`
-&nbsp;               |                      |                          |
-`services.{name}`    | `function`           | -                        | A function that constructs a new instance of the service. Can extend `VideoServiceBase`.
-`services.youtube`   | `function`           | `YouTubeService`         | Implementation of the 'youtube' embed service. Can be overridden by a custom implementation.
-`services.vimeo`     | `function`           | `VimeoService`           | Implementation of the 'vimeo' embed service. Can be overridden by a custom implementation.
-`services.vine`      | `function`           | `VineService`            | Implementation of the 'vine' embed service. Can be overridden by a custom implementation.
-`services.prezi`     | `function`           | `PreziService`           | Implementation of the 'prezi' embed service. Can be overridden by a custom implementation.
-&nbsp;               |                      |                          |
-`{service-name}`     | `object`             | -                        | Options can be supplied to embed services. 
-&nbsp;               |                      |                          |
-`youtube.width`      | `number`             | `640`                    | Width of YouTube embed.
-`youtube.height`     | `number`             | `390`                    | Height of YouTube embed.
-&nbsp;               |                      |                          |
-`vimeo.width`        | `number`             | `500`                    | Width of Vimeo embed.
-`vimeo.height`       | `number`             | `281`                    | Height of Vimeo embed.
-&nbsp;               |                      |                          |
-`vine.width`         | `number`             | `600`                    | Width of Vine embed.
-`vine.height`        | `number`             | `600`                    | Height of Vine embed.
-`vine.embed`         | `string`             | `'simple'`               | Type of embed; for instance, `'simple'` or `'postcard'` (see https://dev.twitter.com/web/vine).
-&nbsp;               |                      |                          |
-`prezi.width`        | `number`             | `550`                    | Width of Prezi embed.
-`prezi.height`       | `number`             | `400`                    | Height of Prezi embed.
-
+| Option               | Type                 | Default                  | Description                                                                                                                               |
+| :------------------- | :------------------- | :----------------------- | :---------------------------------------------------------------------------------------------------------------------------------------- |
+| `containerClassName` | `string` \| `null`   | `'block-embed'`          | Class name for image container element.                                                                                                   |
+| `serviceClassPrefix` | `string`             | `'block-embed-service-'` | Prefix for service name in CSS class.                                                                                                     |
+| `outputPlayerSize`   | `boolean`            | `true`                   | Indicates if 'width' and 'height' attributes are written to output.                                                                       |
+| `allowFullScreen`    | `boolean`            | `true`                   | Indicates whether embed iframe should be allowed to enter full screen mode.                                                               |
+| `filterUrl`          | `function` \| `null` | `null`                   | A function that customizes url output. Signature: `function (url: string, serviceName: string, videoID: string, options: object): string` |
+| &nbsp;               |                      |                          |
+| `services.{name}`    | `function`           | -                        | A function that constructs a new instance of the service. Can extend `VideoServiceBase`.                                                  |
+| `services.youtube`   | `function`           | `YouTubeService`         | Implementation of the 'youtube' embed service. Can be overridden by a custom implementation.                                              |
+| `services.vimeo`     | `function`           | `VimeoService`           | Implementation of the 'vimeo' embed service. Can be overridden by a custom implementation.                                                |
+| `services.vine`      | `function`           | `VineService`            | Implementation of the 'vine' embed service. Can be overridden by a custom implementation.                                                 |
+| `services.prezi`     | `function`           | `PreziService`           | Implementation of the 'prezi' embed service. Can be overridden by a custom implementation.                                                |
+| &nbsp;               |                      |                          |
+| `{service-name}`     | `object`             | -                        | Options can be supplied to embed services.                                                                                                |
+| &nbsp;               |                      |                          |
+| `youtube.width`      | `number`             | `640`                    | Width of YouTube embed.                                                                                                                   |
+| `youtube.height`     | `number`             | `390`                    | Height of YouTube embed.                                                                                                                  |
+| &nbsp;               |                      |                          |
+| `vimeo.width`        | `number`             | `500`                    | Width of Vimeo embed.                                                                                                                     |
+| `vimeo.height`       | `number`             | `281`                    | Height of Vimeo embed.                                                                                                                    |
+| &nbsp;               |                      |                          |
+| `vine.width`         | `number`             | `600`                    | Width of Vine embed.                                                                                                                      |
+| `vine.height`        | `number`             | `600`                    | Height of Vine embed.                                                                                                                     |
+| `vine.embed`         | `string`             | `'simple'`               | Type of embed; for instance, `'simple'` or `'postcard'` (see https://dev.twitter.com/web/vine).                                           |
+| &nbsp;               |                      |                          |
+| `prezi.width`        | `number`             | `550`                    | Width of Prezi embed.                                                                                                                     |
+| `prezi.height`       | `number`             | `400`                    | Height of Prezi embed.                                                                                                                    |
+| &nbsp;               |                      |                          |
+| `nocookie`           | `boolean`            | `false`                  | YouTube only! Enables/disables cookies from embedding YouTube videos.                                                                     |
 
 ## Supported Services
 
@@ -99,8 +102,7 @@ HTML embed codes are currently automatically output for the following services:
 - Prezi
 
 Custom embed services can be specifying in the options that you provide to the
-`markdown-it-block-embed` plugin.   
-
+`markdown-it-block-embed` plugin.
 
 ### YouTube
 
@@ -112,12 +114,16 @@ is interpreted as
 
 ```html
 <div class="block-embed block-embed-service-youtube">
-  <iframe type="text/html"
-          width="640"
-          height="390"
-          src="//www.youtube.com/embed/lJIrF4YjHfQ"
-          frameborder="0"
-          webkitallowfullscreen mozallowfullscreen allowfullscreen>
+  <iframe
+    type="text/html"
+    width="640"
+    height="390"
+    src="//www.youtube.com/embed/lJIrF4YjHfQ"
+    frameborder="0"
+    webkitallowfullscreen
+    mozallowfullscreen
+    allowfullscreen
+  >
   </iframe>
 </div>
 ```
@@ -128,7 +134,7 @@ Alternately, you could use a number of different YouTube URL formats rather than
 @[youtube](http://www.youtube.com/embed/lJIrF4YjHfQ)
 @[youtube](https://www.youtube.com/watch?v=lJIrF4YjHfQ&feature=feedrec_centerforopenscience_index)
 @[youtube](http://www.youtube.com/user/IngridMichaelsonVEVO#p/a/u/1/QdK8U-VIH_o)
-@[youtube](http://www.youtube.com/v/lJIrF4YjHfQ?fs=1&amp;hl=en_US&amp;rel=0)
+@[youtube](http://www.youtube.com/v/lJIrF4YjHfQ?fs=1&hl=en_US&rel=0)
 @[youtube](http://www.youtube.com/watch?v=lJIrF4YjHfQ#t=0m10s)
 @[youtube](http://www.youtube.com/embed/lJIrF4YjHfQ?rel=0)
 @[youtube](http://www.youtube.com/watch?v=lJIrF4YjHfQ)
@@ -145,12 +151,16 @@ is interpreted as
 
 ```html
 <div class="block-embed block-embed-service-vimeo">
-  <iframe type="text/html"
-          width="500"
-          height="281"
-          src="//player.vimeo.com/video/19706846"
-          frameborder="0"
-          webkitallowfullscreen mozallowfullscreen allowfullscreen>
+  <iframe
+    type="text/html"
+    width="500"
+    height="281"
+    src="//player.vimeo.com/video/19706846"
+    frameborder="0"
+    webkitallowfullscreen
+    mozallowfullscreen
+    allowfullscreen
+  >
   </iframe>
 </div>
 ```
@@ -172,12 +182,16 @@ is interpreted as
 
 ```html
 <div class="block-embed block-embed-service-vine">
-  <iframe type="text/html"
-          width="600"
-          height="600"
-          src="//vine.co/v/bjHh0zHdgZT/embed/simple"
-          frameborder="0"
-          webkitallowfullscreen mozallowfullscreen allowfullscreen>
+  <iframe
+    type="text/html"
+    width="600"
+    height="600"
+    src="//vine.co/v/bjHh0zHdgZT/embed/simple"
+    frameborder="0"
+    webkitallowfullscreen
+    mozallowfullscreen
+    allowfullscreen
+  >
   </iframe>
 </div>
 ```
@@ -196,16 +210,20 @@ Alternately, you could use the url, or even the whole embed tag instead of just 
 @[prezi](1kkxdtlp4241)
 ```
 
-is interpreted as 
+is interpreted as
 
 ```html
 <div class="block-embed block-embed-service-prezi">
-  <iframe type="text/html"
-          width="550"
-          height="400"
-          src="https://prezi.com/embed/1kkxdtlp4241/?bgcolor=ffffff&amp;lock_to_path=0&amp;autoplay=0&amp;autohide_ctrls=0&amp;landing_data=bHVZZmNaNDBIWnNjdEVENDRhZDFNZGNIUE43MHdLNWpsdFJLb2ZHanI5N1lQVHkxSHFxazZ0UUNCRHloSXZROHh3PT0&amp;landing_sign=1kD6c0N6aYpMUS0wxnQjxzSqZlEB8qNFdxtdjYhwSuI"
-          frameborder="0"
-          webkitallowfullscreen mozallowfullscreen allowfullscreen>
+  <iframe
+    type="text/html"
+    width="550"
+    height="400"
+    src="https://prezi.com/embed/1kkxdtlp4241/?bgcolor=ffffff&amp;lock_to_path=0&amp;autoplay=0&amp;autohide_ctrls=0&amp;landing_data=bHVZZmNaNDBIWnNjdEVENDRhZDFNZGNIUE43MHdLNWpsdFJLb2ZHanI5N1lQVHkxSHFxazZ0UUNCRHloSXZROHh3PT0&amp;landing_sign=1kD6c0N6aYpMUS0wxnQjxzSqZlEB8qNFdxtdjYhwSuI"
+    frameborder="0"
+    webkitallowfullscreen
+    mozallowfullscreen
+    allowfullscreen
+  >
   </iframe>
 </div>
 ```
@@ -217,7 +235,6 @@ Alternately, you could use the url.
 @[prezi](https://prezi.com/e3g83t83nw03/destination-prezi-template/)
 @[prezi](https://prezi.com/prg6t46qgzik/anatomy-of-a-social-powered-customer-service-win/)
 ```
-
 
 ## Contribution Agreement
 
